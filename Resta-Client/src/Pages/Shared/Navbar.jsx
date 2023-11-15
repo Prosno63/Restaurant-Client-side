@@ -15,7 +15,7 @@ const Navbar = () => {
     
     </>
     return (
-        <div className="navbar fixed z-20 bg-opacity-30 bg-slate-200 max-w-screen-xl mx-auto text-white">
+        <div className="navbar fixed z-20 bg-opacity-30 bg-red-600 max-w-screen-xl mx-auto text-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -25,7 +25,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Khanna</a>
+                <a className="btn btn-ghost text-2xl text-yellow-600 uppercase">Khanna</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
