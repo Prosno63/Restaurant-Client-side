@@ -6,8 +6,12 @@ import 'react-tabs/style/react-tabs.css';
 import { Helmet } from 'react-helmet-async';
 import useMenu from '../../Hooks/useMenu';
 import FoodCard from '../../components/MenuStyle/FoodCard/FoodCard';
+import { useParams } from 'react-router-dom';
 
 const Order = () => {
+
+    
+
     const [tabIndex, setTabIndex] = useState(0);
     const [menu] = useMenu([]);
     const offered = menu.filter(item => item.category === 'offered');
