@@ -2,14 +2,18 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import UseAxiosHook from '../../../Hooks/UseAxiosHook';
+import useCart from '../../../Hooks/useCart';
+
 
 const FoodCard = ({ item }) => {
 
     const { image, price, name, recipe, _id } = item;
 
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const axiosHook = UseAxiosHook();
+    const [, refetch]= useCart();
 
     const handelAddToCart = food => {
 
@@ -22,7 +26,7 @@ const FoodCard = ({ item }) => {
                 image,
                 price
             }
-            axios.post('http://localhost:5000/carts', cartItem )
+            axiosHook.post('/carts', cartItem )
             .then(res=>{
                 console.log(res.data)
                 if(res.data.insertedId){
@@ -33,6 +37,8 @@ const FoodCard = ({ item }) => {
                         showConfirmButton: false,
                         timer: 1500
                       });
+
+                      refetch();
                 }
             })
 
