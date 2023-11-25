@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
+import UseAxiosPublic from '../../Hooks/UseAxiosPublic';
+import Swal from 'sweetalert2';
+import { FaGoogle } from 'react-icons/fa6';
+import SocialLogIn from '../../components/SocialLogin/SocialLogIn';
 
 const SignUp = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
+    const axiosPublic = UseAxiosPublic(); 
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(result => {
@@ -16,11 +21,32 @@ const SignUp = () => {
                 console.log(loggedUser);
                 updateUserProfile(data.username)
                 .then(()=>{
+                    const userInfo ={
+                        name : data.username,
+                        email: data.email
+                    }
 
-                    reset();
+                    axiosPublic.post('/users', userInfo )
+                    .then(res=>{
+
+                        if (res.data.insertedId){
+
+                            reset();
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User Created",
+                                showConfirmButton: false,
+                                timer: 50000
+                              });
+                            window.location.href = '/login';
+
+                        }
+
+                    })
 
                 })
-                window.location.href = '/login';
+               
                 
             })
     }
@@ -79,6 +105,7 @@ const SignUp = () => {
                                 <button className="btn btn-primary">Sign Up</button>
                             </div>
                             <p className='text-center'>Already have an Account? <Link className='text-blue-600' to='/login'>Login</Link></p>
+                            <SocialLogIn></SocialLogIn>
                         </form>
                     </div>
                 </div>
