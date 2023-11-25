@@ -33,7 +33,7 @@ const Navbar = () => {
 
 
                 <li><Link onClick={handleLogOut}>Log Out</Link></li>
-                <li><Link>
+                <li><Link to='/dashboard/cart'>
                     <button className="btn">
                         <FaCartShopping></FaCartShopping>
                         <div className="badge badge-secondary"> + {cart.length}</div>
