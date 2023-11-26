@@ -3,10 +3,11 @@ import { FaCalendar, FaCartShopping, FaHouseMedical, FaList, FaSpoon, FaUser } f
 import { NavLink, Outlet } from 'react-router-dom';
 import { GoCodeReview } from "react-icons/go";
 import useCart from '../Hooks/useCart';
+import useAdmin from '../Hooks/useAdmin';
 const Dashboard = () => {
 
     const [cart] = useCart();
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className='flex'>
             <div className='bg-green-500 w-64 min-h-screen'>
