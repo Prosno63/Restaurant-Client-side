@@ -4,6 +4,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SocialLogIn from '../../components/SocialLogin/SocialLogIn';
 
 const Login = () => {
 
@@ -23,7 +24,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, {replace:true});
+                navigate(from, { replace: true });
 
 
             })
@@ -54,9 +55,9 @@ const Login = () => {
 
     return (
         <>
-        <Helmet>
-            <title>KhanaKhaja | LogIn</title>
-        </Helmet>
+            <Helmet>
+                <title>KhanaKhaja | LogIn</title>
+            </Helmet>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
@@ -85,12 +86,15 @@ const Login = () => {
                                 </label>
                                 <input type="text" onBlur={handleValidateCaptcha} placeholder="Type the above captcha here" name='captcha' className="input input-bordered" required />
                                 <p className="mt-2 text-center">Captcha Check</p>
-                             </div>
+                            </div>
                             <div className="form-control mt-6">
                                 <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
                         <p className='text-center mb-2'>New here? <Link className='text-blue-600' to='/signUp'>Create an Account</Link></p>
+                        <div className='mb-2'>
+                            <SocialLogIn></SocialLogIn>
+                        </div>
                     </div>
                 </div>
             </div></>
