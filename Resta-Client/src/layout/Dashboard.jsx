@@ -24,6 +24,8 @@ const Dashboard = () => {
 
                             <li><NavLink to='/dashboard/addItems'>
                                 <FaSpoon></FaSpoon> Add Items</NavLink></li>
+                            <li><NavLink to='/dashboard/manageItems'>
+                                <FaSpoon></FaSpoon>Manage Item</NavLink></li>
 
                             <li><NavLink to='/dashboard/bookings'>
                                 <FaList></FaList> Handle Bookings</NavLink></li></>

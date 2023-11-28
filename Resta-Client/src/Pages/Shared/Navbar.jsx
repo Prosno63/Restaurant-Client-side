@@ -42,6 +42,14 @@ const Navbar = () => {
                         <div className="badge badge-secondary"> + {cart.length}</div>
                     </button>
                 </Link></li>
+                {
+                    isAdmin ? <>
+
+                        <li><Link to='/dashboard'>Manage Site</Link></li>
+                    </>
+                        :
+                        <></>
+                }
 
 
             </>
@@ -50,14 +58,7 @@ const Navbar = () => {
 
                 <> <li><Link to='/login'>Log in</Link></li> </>
         }
-        {
-            isAdmin ? <>
 
-                <li><Link to='/dashboard'>Manage Site</Link></li>
-            </>
-                :
-                <></>
-        }
 
 
 
@@ -87,7 +88,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <p className="text-3xl">
+                <p className="text-sm lg:text-3xl">
                     {user?.displayName && `Hi, ${user.displayName}`}
                 </p>
             </div>
