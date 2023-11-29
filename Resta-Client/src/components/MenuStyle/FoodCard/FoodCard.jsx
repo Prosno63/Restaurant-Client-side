@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import UseAxiosHook from '../../../Hooks/UseAxiosHook';
 import useCart from '../../../Hooks/useCart';
+import useAdmin from '../../../Hooks/useAdmin';
 
 
 const FoodCard = ({ item }) => {
@@ -11,6 +12,7 @@ const FoodCard = ({ item }) => {
     const { image, price, name, recipe, _id } = item;
 
     const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const navigate = useNavigate();
     const axiosHook = UseAxiosHook();
     const [, refetch]= useCart();
@@ -72,7 +74,13 @@ const FoodCard = ({ item }) => {
                 <p>{recipe}</p>
                 <p className='text-red-700 text-lg'>${price}</p>
                 <div className="card-actions">
-                    <button onClick={() => handelAddToCart(item)} className="btn btn-primary">Add to Cart</button>
+                    {
+                        isAdmin? <>
+                        </>
+                        
+                        :<>
+                        <button onClick={() => handelAddToCart(item)} className="btn btn-primary">Add to Cart</button></>
+                    }
                 </div>
             </div>
         </div>

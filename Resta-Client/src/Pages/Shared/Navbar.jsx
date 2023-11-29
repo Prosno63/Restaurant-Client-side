@@ -24,9 +24,9 @@ const Navbar = () => {
 
     const navLinks = <>
 
-        <li><Link>Home</Link></li>
-        <li><Link to='/menu'>Our Menu</Link></li>
-        <li><Link to='/order'>Orders</Link></li>
+        <li className='mr-1'><NavLink to='/'>Home</NavLink></li>
+        <li className='mr-1'><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li className='mr-1'><NavLink to='/order'>Orders</NavLink></li>
 
 
 
@@ -35,17 +35,22 @@ const Navbar = () => {
             user ? <>
 
 
-                <li><Link onClick={handleLogOut}>Log Out</Link></li>
-                <li><Link to='/dashboard/cart'>
-                    <button className="btn">
-                        <FaCartShopping></FaCartShopping>
-                        <div className="badge badge-secondary"> + {cart.length}</div>
-                    </button>
-                </Link></li>
+                <li className='mr-1'><Link onClick={handleLogOut}>Log Out</Link></li>
+                {
+                    !isAdmin ? <>
+
+                        <li><NavLink to='/dashboard/cart'>
+                            <div className="indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                <span className="badge badge-sm indicator-item">{cart.length}</span>
+                            </div>
+                        </NavLink></li>
+                    </> : <></>
+                }
                 {
                     isAdmin ? <>
 
-                        <li><Link to='/dashboard'>Manage Site</Link></li>
+                        <li><NavLink to='/dashboard'>Manage Site</NavLink></li>
                     </>
                         :
                         <></>
@@ -56,7 +61,7 @@ const Navbar = () => {
 
                 :
 
-                <> <li><Link to='/login'>Log in</Link></li> </>
+                <> <li><NavLink to='/login'>Log in</NavLink></li> </>
         }
 
 
