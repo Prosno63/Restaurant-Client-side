@@ -5,13 +5,14 @@ import { FaTrash } from 'react-icons/fa6';
 import { CiEdit } from "react-icons/ci";
 import Swal from 'sweetalert2';
 import UseAxiosHook from '../../Hooks/UseAxiosHook';
+import { Link } from 'react-router-dom';
 
 
 
 
 const ItemHandler = () => {
 
-    const [menu] = useMenu();
+    const [menu, refetch] = useMenu();
     const axiosHook = UseAxiosHook();
 
 
@@ -26,18 +27,19 @@ const ItemHandler = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
-                    if (result.isConfirmed) {
-                      const response = await axiosHook.delete(`/menu/${item._id}`);
-                      console.log(response.data)
-                      if (response.data.deletedCount > 0) {
-                        Swal.fire({
-                          title: "Deleted!",
-                          text: "Your file has been deleted.",
-                          icon: "success"
-                        });
-                      }
-                    }
-                  });
+            if (result.isConfirmed) {
+                const response = await axiosHook.delete(`/menu/${item._id}`);
+                console.log(response.data)
+                if (response.data.deletedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            }
+        });
 
 
 
@@ -86,7 +88,10 @@ const ItemHandler = () => {
                                     </td>
                                     <td>{item.price}</td>
                                     <th>
-                                        <button onClick={() => handleEditItem(item)} className="btn btn-md text-blue-600"> <CiEdit /> </button>
+
+                                        <Link to = {`/dashboard/update/${item._id}`} >  <button className="btn btn-md text-blue-600"> <CiEdit /> </button>
+                                        </Link>
+
                                     </th>
                                     <th>
                                         <button onClick={() => handleDeleteItem(item)} className="btn btn-md text-red-600"><FaTrash></FaTrash></button>
