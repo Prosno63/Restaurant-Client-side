@@ -40,13 +40,13 @@ const Dashboard = () => {
                                     <FaCartShopping></FaCartShopping> My cart ({cart.length})</NavLink></li>
 
                                 <li><NavLink to='/dashboard/reservation'>
-                                    <FaCalendar></FaCalendar> Reservation</NavLink></li>
+                                    <FaCalendar></FaCalendar>Reservation</NavLink></li>
 
                                 <li><NavLink to='/dashboard/review'>
                                     <GoCodeReview /> Add a Review</NavLink></li>
 
-                                <li><NavLink to='/dashboard/bookings'>
-                                    <FaList></FaList> My Bookings</NavLink></li>
+                                <li><NavLink to='/dashboard/paymentHistory'>
+                                    <FaList></FaList>Payment History</NavLink></li>
                             </>
                     }
 
