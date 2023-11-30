@@ -4,6 +4,7 @@ import { FaCross } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import UseAxiosHook from '../../../Hooks/UseAxiosHook';
 import { MdDeleteForever } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -13,7 +14,7 @@ const Cart = () => {
 
     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
-     const handleDelete = id =>{
+    const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -22,32 +23,39 @@ const Cart = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              
-              axiosHook.delete(`/carts/${id}`)
-              .then(res=>{
-                if (res.data.deletedCount>0){
-                    refetch();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                      });
 
-                }
-              })
+                axiosHook.delete(`/carts/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
             }
-          });
-     }
+        });
+    }
     return (
-        <div className='border'>
+        <div className='p-2'>
 
             <h1 className="text-6xl text-center">My Cart</h1>
             <div className='flex justify-around gap-x-8 items-center mt-5'>
                 <h2 className="text-4xl text-center">Item: {cart.length}</h2>
                 <h2 className="text-4xl text-center"> Total Price: {totalPrice}</h2>
-                <button className="btn btn-outline btn-primary"> Make Payment</button>
+                {cart.length ?
+                    <Link to='/dashboard/payment'><button className="btn btn-outline btn-primary"> Make Payment</button></Link> :
+                    <>
+
+                        <button disabled className="btn btn-outline btn-primary"> Make Payment</button>
+
+                    </>
+                }
             </div>
 
             <div className="overflow-x-auto">
@@ -67,10 +75,10 @@ const Cart = () => {
                     <tbody>
 
                         {
-                            cart.map((item, index)=><tr key={item._id}>
+                            cart.map((item, index) => <tr key={item._id}>
                                 <th>
-                                    {index+1}
-                                    
+                                    {index + 1}
+
                                 </th>
                                 <td>
                                     <div className="flex items-center gap-3">
@@ -79,25 +87,25 @@ const Cart = () => {
                                                 <img src={item.image} />
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </td>
                                 <td>
                                     {item.name}
                                     <br />
-                                   
+
                                 </td>
                                 <td>{item.price}</td>
                                 <th>
-                                    <button onClick={()=> handleDelete(item._id)} className="btn btn-ghost btn-lg"><MdDeleteForever /></button>
+                                    <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><MdDeleteForever /></button>
                                 </th>
-                            </tr> )
+                            </tr>)
                         }
                         {/* row 1 */}
-                        
-                        
-                       
-                        
+
+
+
+
                     </tbody>
 
                 </table>
