@@ -50,7 +50,7 @@ const Navbar = () => {
                 {
                     isAdmin ? <>
 
-                        <li><NavLink to='/dashboard'>Manage Site</NavLink></li>
+                        <li><NavLink to='/dashboard/adminHome'>Dashboard</NavLink></li>
                     </>
                         :
                         <></>

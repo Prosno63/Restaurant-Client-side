@@ -18,6 +18,8 @@ import ItemHandler from "../layout/AdminPages/ItemHandler";
 import UpdateItem from "../layout/AdminPages/UpdateItem";
 import Payment from "../Pages/UserDashboard/Payment/Payment";
 import PaymentHistory from "../Pages/UserDashboard/PaymentHistory/PaymentHistory";
+import UserHome from "../Pages/UserDashboard/UserHome/UserHome";
+import AdminHome from "../layout/AdminPages/AdminHome";
 
 
 
@@ -70,6 +72,10 @@ export const router = createBrowserRouter([
 
             },
             {
+                path: 'userHome',
+                element: <UserHome></UserHome>
+            },
+            {
                 path: 'payment',
                 element: <Payment></Payment>
 
@@ -80,6 +86,13 @@ export const router = createBrowserRouter([
             },
 
             //admin routes
+
+            {
+                path: 'adminHome',
+                element: <AdminHome></AdminHome>
+
+
+            },
             
             {
                 path: 'users',

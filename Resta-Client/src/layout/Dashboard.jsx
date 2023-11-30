@@ -34,7 +34,7 @@ const Dashboard = () => {
 
                             <>
                                 <li><NavLink to='/dashboard/userHome'>
-                                    <FaHouseMedical></FaHouseMedical> Home</NavLink></li>
+                                    <FaHouseMedical></FaHouseMedical>Home</NavLink></li>
 
                                 <li><NavLink to='/dashboard/cart'>
                                     <FaCartShopping></FaCartShopping> My cart ({cart.length})</NavLink></li>
